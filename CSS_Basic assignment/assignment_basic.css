@@ -3,3 +3,127 @@
   margin: 0;
   padding: 0;
 }
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#main-header{
+  background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+  background-size:cover;
+  color: white;
+  text-align: center;
+  padding: 20px 0px;
+  height: 200px; /*  높이를 더 키웠습니다. */
+  /* height를 키우면 왜 아래쪽만 늘어나는지? */
+  /* >> text-align: center는 가로 정렬만 담당하고 있음 */
+  /* >> display: flex;
+        align-items: center; -- 수직 정렬
+        justify-content: center; */ 
+}
+
+.signup-form > form {
+  display:flex;
+  flex-direction:column;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  margin: 0 auto;
+  width: 300px;
+  /* 
+  1) 왜 그저 .signup-form 클래스에 주지 않고 >form 이라고 해서 쓰는걸까?
+  이유는 그냥 클래스에 주게되면 해당 클래스의 div 태그에 적용되기 때문이다 
+  에제 코드에서는 form에게만 적용했기 때문에 직계 자식으로 쓰는 css를 적용해야함 
+  2) 이렇게 하니까 남 여 성별 radio 도 중앙으로 정렬됨 div로 나눠야 하나? 
+  div로 나눔 단, 성별: 부분부터 나누는게 아니고 radio 부터 나눔
+  */
+}
+
+.signup-form input, .signup-form button{
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom:15px
+  /* 이건 폼 작성하는 input과 그 하단에 있는 버튼 크기와 선에 대한 css이다 
+  단 버튼 색은 다르게 적용할거임 ==> 회원가입 버튼에 대한 섹션도 나눠져 있을거같음 
+  > 사실 그냥 버튼으로만 적용하면 되는거였다 */
+}
+
+.signup-form button{
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer; /* 버튼에 마우스 올리면 손가락 모양으로 바뀜  */
+  transition: background-color 0.3s;
+  /*  이건 배경색이 변하는 게 있다면 0.3초의 간격으로 부드럽게 보여줘라 라는 의미로
+  만약 hover(바뀌게 하는것)와 함께 쓰지 않는다면 아무 의미 없음 
+  여기서 그럼 또 궁금한점! 이걸 왜 hover 안에 넣는게 아니고 여기 넣음? 
+  그 이유는 hover 적용 시 이미 바뀐 상태이기 때문에 transition 효과를 적용할 수 없음
+  즉, transition은 변화할 준비를 미리 해두는 설정이라고 생각하면됨  */
+  /* radius는 적용 안해도됨 위에서 했음  */
+}
+
+.signup-form button:hover{
+  background-color: #45a049;
+  animation:pulse 0.5s;
+  /* 강사님은 color와 animation을 나눠서 쓰셨는데 왜 그랬을까? 
+   chat gpt에 돌리니까 이렇게 나옴
+   기능별로 역할을 나눠서 관리"하기 위해 스타일을 분리했을 가능성이 높아.
+  (== 유지보수, 가독성, 명확한 역할 분리)
+  강사님께 다시 한번 여쭤보기*/
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+
+}
+
+.sidebar nav ul {
+  list-style: none;
+  /* 여기서 none 없으면 불렛 포인트가 보임 
+  근데 padding 을 안줬을땐 아예 안보임 왜 그런거지? 
+  chatgpt에 물어봐도 확실한 답을 모르겠음 
+  여기서 또 궁금증
+  > 아래에 있는 ul li a 에 같이 넣을 수 는 없는거임? 
+  - 정답은 안됨 list-style은 ul, ol, li 같은 목록(list) 요소에만 적용되는 속성으로
+  a링크는 text일 뿐으로 적용 안됨 */
+  padding: 10px;
+}
+
+.sidebar nav ul li a {
+  color:white;
+  display: block;
+  padding: 10px; 
+  /* 이걸 줘야 버튼처럼 네모 박스가 생기는거임 
+  근데! 문제는 a태그의 display 속성은 인라인이라서 패딩줘도 안떨어짐 
+  그래서 이럴때는 display:block을 해줘야되는거임*/
+  margin-bottom: 5px;
+  background-color: #4CAF50;
+  transition: background-color 0.3;
+  text-decoration:none; /* a의 기본 속성은 밑줄이 생기는데 그걸 방지해줌 */
+}
+
+.sidebar nav ul li a:hover{
+  background-color: #45a049;
+  /* 보니까 얘는 cursor 안해줘도 손가락 모양으로 바뀌더라 
+  a가 자동 적용해주나봄? */
+}
+
+
+
+
+footer{
+  background-color: #333;
+  color:white;
+  text-align: center;
+  padding: 10px 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
