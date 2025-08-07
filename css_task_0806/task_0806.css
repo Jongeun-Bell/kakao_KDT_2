@@ -1,9 +1,11 @@
+/* 전체 선택자 */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+/* 태그 선택자 */
 body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
@@ -12,6 +14,29 @@ body {
   flex-direction: column;
 }
 
+/* 클래스 선택자 (.) 사용 */
+.header-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 플렉스 레이아웃 */
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+  flex: 1; /* 콘텐츠 영역이 남은 공간을 차지하도록 설정 */
+}
+
+/* html body태그에서 header 또는 main container로 크게 나눈다
+왜? 스타일을 적용하거나 배치 정렬을 할 때 구분이 명확짐 
+아예 큰데에서 각각 CSS를 적용하면 사이즈도 따로 따로 맞춰야 하니까 너무 어려움
+하지만, 컨테이너를 적용해놓으면 크게크게 나눠지고 그 안에서 각 요소들의 배치를 
+생각하고 나누면 되니까 훨씬 쉬워짐 */
+
+/* 아이디 선택자 (#) 사용 */
 #main-header{
   background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
   background-size:cover;
@@ -26,6 +51,7 @@ body {
         justify-content: center; */ 
 }
 
+/* 자식 선택자 (>) 사용 */
 .signup-form > form {
   display:flex;
   flex-direction:column;
@@ -43,11 +69,12 @@ body {
   */
 }
 
+/* 박스모델 속성 */
 .signup-form input, .signup-form button{
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
-  margin-bottom:15px
+  margin-bottom:15px;
   /* 이건 폼 작성하는 input과 그 하단에 있는 버튼 크기와 선에 대한 css이다 
   단 버튼 색은 다르게 적용할거임 ==> 회원가입 버튼에 대한 섹션도 나눠져 있을거같음 
   > 사실 그냥 버튼으로만 적용하면 되는거였다 */
@@ -66,6 +93,13 @@ body {
   /* radius는 적용 안해도됨 위에서 했음  */
 }
 
+/* 여기서 궁금했던점! 
+1) signup-form button을 두 번 쓰셨는데 왜? 
+> 공통 스타일과 개별 스타일을 나눠서 적용하려고 하신거임 - 즉, 의도적 분리
+2) 그렇다면 input은 배경색을 적용하지 않았는데 왜 흰색인거임? 
+> 기본값이 흰색임 - 즉, 별도로 지정하지 않으면 흰색으로 나타남  */
+
+
 .signup-form button:hover{
   background-color: #45a049;
   animation:pulse 0.5s;
@@ -81,6 +115,16 @@ body {
   50% { transform: scale(1.1); }
   100% { transform: scale(1); }
 
+}
+
+label[for="name"]::before{
+  content: "👤";
+  margin-right:5px;
+} 
+
+/* 인접 형제 선택자 */
+.signup-form label + input {
+  margin-bottom: 10px;
 }
 
 .sidebar nav ul {
@@ -104,7 +148,7 @@ body {
   그래서 이럴때는 display:block을 해줘야되는거임*/
   margin-bottom: 5px;
   background-color: #4CAF50;
-  transition: background-color 0.3;
+  transition: background-color 0.3s;
   text-decoration:none; /* a의 기본 속성은 밑줄이 생기는데 그걸 방지해줌 */
 }
 
@@ -114,7 +158,28 @@ body {
   a가 자동 적용해주나봄? */
 }
 
+.sidebar{
+  position:absolute;
+  top: 220px;
+  left: 20px;
+  width: 200px;
+  /* 해당 클래스 선택자를 주기전에는 사이드바의 위치가 헤더 밑이긴 하나
+  옆에 위치 하지 않고 폼 요소 위에 있었다 그럼 어떻게 이렇게 적용되는걸까? 
+  > 일단 먼저 body:absolute 는 요소를 문서의 일반적인 흐름에서 제거하고,
+  지정된 위치(top, left 등)로 정확하게 배치하는 속성임. 단, 기준 위치는
+  가장 가까운 조상 position: relative, absolute, fixed, sticky 중
+  하나가 설정된 요소가 있다면 그 요소를 기준으로 위치가 잡히나, 없다면 
+  body나 html이 기준 위치로 잡힘 해당 코드에서는 relative가 적용된 요소가 
+  없기 때문에 body위치로 잡히며 top 220px는 header의 높이가 200px이기
+  때문에 준 값이다. 
+  */
+}
 
+.sidebar nav ul {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
 
 
 footer{
